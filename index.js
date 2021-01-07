@@ -8,7 +8,7 @@ const { debug } = require('console');
 const { json } = require('express');
 
 server = app.listen(7000, () => {
-  console.log('listening on *:3000');
+  console.log('listening on *:7000');
 });
 
 app.use(express.static("public"));
@@ -30,6 +30,17 @@ io.on('connection', (socket) => {
     socket.on('click', () => {
         console.log("click");
         robot.mouseClick();
+    })
+
+    socket.on('volume', (arg) => {
+        if (arg == '+') {
+            console.log('volume +')
+            robot.keyTap("audio_vol_up");
+        }
+        if (arg == '-') {
+            console.log('volume -')
+            robot.keyTap("audio_vol_down")
+        }
     })
 
     socket.on('disconnect', () => {
