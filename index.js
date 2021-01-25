@@ -2,10 +2,6 @@ express = require('express')
 app = express();
 socket = require('socket.io');
 var robot = require("robotjs");
-var jf = require('jsonfile'); //jsonfile module
-var fs = require('fs');
-const { debug } = require('console');
-const { json } = require('express');
 
 server = app.listen(7000, () => {
   console.log('listening on *:7000');
