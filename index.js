@@ -11,19 +11,18 @@ app.use(express.static("public"));
 
 //Socket
 io = socket(server)
-let clicked = 0;
+const velocity= 1.3;
  
 io.on('connection', (socket) => {
     console.log(socket.id+ ' connected');
 
-    socket.on('cursor', (rx, ry) => {
+    socket.on('cursor', async (rx, ry) => {
         console.log(rx, ry);
         var mouse = robot.getMousePos();
-        robot.dragMouse(mouse.x+(rx*1.3), mouse.y+(ry*1.3))
-        //console.log(mouse)
+        robot.dragMouse(mouse.x+(rx*velocity), mouse.y+(ry*velocity))
     })
 
-    socket.on('click', () => {
+    socket.on('click', async () => {
         console.log("click");
         robot.mouseClick();
     })
